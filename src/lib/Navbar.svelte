@@ -2,8 +2,8 @@
 	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger } from "flowbite-svelte";
 	
 	let links = [
-		{ name: "Login", href: "/" },
-		{ name: "Home", href: "/home" },
+		{ name: "Log out", href: "/" },
+		// { name: "Home", href: "/home" },
 	];
 </script>
 
