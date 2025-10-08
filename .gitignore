@@ -34,6 +34,10 @@ bower_components
 # node-waf configuration
 .lock-wscript
 
+# Build output
+build/
+public/build/
+
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 
@@ -69,6 +73,9 @@ web_modules/
 .env
 .env.*
 !.env.example
+
+# Logs
+*.log
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -124,6 +131,11 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+
+# Editor files
+.vscode/
+.idea/
+.DS_Store
 
 # yarn v3
 .pnp.*
