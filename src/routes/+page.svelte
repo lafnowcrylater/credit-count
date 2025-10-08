@@ -19,7 +19,7 @@
     <title>Login</title>
 </svelte:head>
 
-<main class="page-container">
+<main class="h-screen flex items-center justify-center bg-gray-100">
   <Card size="lg" class="w-md h-fit rounded-xl p-4 sm:p-8 md:p-8">
     <form method="POST">
         <h1 class="text-center text-3xl">Login</h1>
@@ -33,14 +33,3 @@
     </form>
   </Card>
 </main>
-
-<style>
-  /* Make the page container fill the whole viewport and center its content */
-  .page-container {
-    display: flex;
-    align-items: center;     /* vertically center */
-    justify-content: center; /* horizontally center */
-    height: 100vh;           /* full viewport height */
-    background-color: #f5f5f5;
-  }
-</style>
