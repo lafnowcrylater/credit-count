@@ -67,9 +67,9 @@ a:hover {
 body {
   margin: 0;
   /* display: flex;
-  place-items: center; */
+  place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 100vh; */
 }
 
 /* h1 {
@@ -88,27 +88,7 @@ body {
   text-align: center;
 }
 
-button {
-    display: block;
-    height: 40px;
-    line-height: 40px;
-    margin: auto;
-    /* padding: 0.6em 1.2em; */
-    padding: 0px 1.4em;
-    border-radius: 8px;
-    border: 1px solid transparent;
-    font-size: 1em;
-    font-weight: 500;
-    font-family: inherit;
-    background-color: #e07b17;
-    margin-top: 24px;
-    cursor: pointer;
-    transition: border-color 0.25s;
-}
 
-button:hover {
-  background-color: #d37416;
-}
 /* button:focus,
 button:focus-visible {
     outline-style: solid;

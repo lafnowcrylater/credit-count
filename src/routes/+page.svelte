@@ -1,6 +1,6 @@
 <script lang='ts'>
     import { goto } from '$app/navigation';
-    import { Label, Input, Button, Card } from "flowbite-svelte";
+    import { Label, Input, Card } from "flowbite-svelte";
 
     let form = { email: '', password: ''};
 
@@ -29,7 +29,31 @@
         <Label for="password" class="mb-2 block">Password</Label>
         <Input id="password" type='password' bind:value={form.password} autocomplete="current-password" required/>
     
-        <Button type="submit" onclick={check} >Submit</Button>
+        <button type="submit" onclick={check}>Submit</button>
     </form>
   </Card>
 </main>
+
+<style>
+  button {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    margin: auto;
+    /* padding: 0.6em 1.2em; */
+    padding: 0px 1.4em;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #e07b17;
+    margin-top: 24px;
+    cursor: pointer;
+    transition: border-color 0.25s;
+  }
+
+  button:hover {
+    background-color: #d37416;
+  }
+</style>
