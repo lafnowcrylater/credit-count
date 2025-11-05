@@ -10,7 +10,7 @@
 	$: courseGroup = $courseGroups.find(g => g.id === $page.params.id);
 	
 	function goBack() {
-		goto('{base}/home');
+		goto('${base}/home');
 	}
 	
 	function getStatusColor(completed) {
