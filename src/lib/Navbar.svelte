@@ -16,9 +16,9 @@
 	</ul>
 </nav> -->
 
-<Navbar class="h-[60px] w-full flex justify-center items-center bg-[#e07b17] py-3 px-6">
+<Navbar class="sticky top-0 z-50 h-[60px] w-full flex justify-center items-center bg-[#e07b17] py-3 px-6">
 	<NavBrand>
-		<span class="logo text-white text-2xl font-semibold">CreditCount</span>
+		<a href='/home' class="logo text-white text-2xl font-semibold hover:no-underline">CreditCount</a>
 	</NavBrand>
 
 	<NavUl>
@@ -52,9 +52,5 @@
 		text-decoration: none;
 		color: white;
 		font-weight: 500;
-	}
-
-	a:hover {
-		text-decoration: underline;
 	}
 </style>
