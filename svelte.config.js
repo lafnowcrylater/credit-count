@@ -16,15 +16,20 @@ import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 const dev = process.argv.includes('dev');
-const base = dev ? '' : '/credit-count';
+const base = dev ? '' : '/credit-count'; // change to your repo name
 
 export default {
-	preprocess: vitePreprocess(),
-	kit: {
-		adapter: adapter(),
-		paths: {
-			base, // GitHub Pages expects a subpath
-		}
-	}
+  preprocess: vitePreprocess(),
+  kit: {
+    adapter: adapter({
+      fallback: '200.html'
+    }),
+    paths: {
+      base
+    },
+    prerender: {
+      handleHttpError: 'warn' // suppress warnings about missing base paths
+    }
+  }
 };
 

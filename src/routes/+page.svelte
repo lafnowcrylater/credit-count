@@ -1,6 +1,7 @@
 <script lang='ts'>
     import { goto } from '$app/navigation';
     import { Label, Input, Card } from "flowbite-svelte";
+    import { base } from '$app/paths';
 
     let form = { email: '', password: ''};
 
@@ -11,7 +12,7 @@
         // } else {
         //     alert("Invalid login");
         // }
-        goto('/home');
+        goto('{base}/home');
     }
 </script>
 

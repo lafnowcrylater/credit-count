@@ -3,6 +3,7 @@
 	import Navbar from "$lib/Navbar.svelte";
 	import { Card } from "flowbite-svelte";
 	import { courseGroups } from "$lib/stores/courseStore";
+	import { base } from '$app/paths';
 
 	let id = '66050000', name = "John Doe", faculty = "วิทยาศาสตร์", major = "วิทยาการคอมพิวเตอร์", year = 3;
 
@@ -31,7 +32,7 @@
 	<NavUl class="flex items-center space-x-4">
 		<NavLi class="text-white text-base cursor-pointer">66050000</NavLi>
 		<Dropdown simple>
-			<DropdownItem href="/" class="text-black text-sm">Sign out</DropdownItem>
+			<DropdownItem href="{base}/" class="text-black text-sm">Sign out</DropdownItem>
 		</Dropdown>
 	</NavUl>
 </Navbar>
@@ -71,7 +72,7 @@
 		
 		{#each $courseGroups as group}
 			<Card class="max-w-full p-5 sm:p-8 md:p-10 justify-center cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-101 hover:bg-white"
-				href='/courses/{group.id}'
+				href='{base}/courses/{group.id}'
 				tabindex="0"
 				role="button"
 			>

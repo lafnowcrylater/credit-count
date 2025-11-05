@@ -5,11 +5,12 @@
 	import Navbar from "$lib/Navbar.svelte";
 	import { Card } from "flowbite-svelte";
 	import { courseGroups } from "$lib/stores/courseStore";
+	import { base } from '$app/paths';
 	
 	$: courseGroup = $courseGroups.find(g => g.id === $page.params.id);
 	
 	function goBack() {
-		goto('/home');
+		goto('{base}/home');
 	}
 	
 	function getStatusColor(completed) {
