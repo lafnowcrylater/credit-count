@@ -113,6 +113,7 @@ export async function deleteSession(sessionId) {
 
 // Login user - using student ID and password
 export async function loginUser(studentId, password) {
+  console.log('DEBUG from loginUser:', studentId);
   // Check if student exists
   const [student] = await db
     .select()

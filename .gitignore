@@ -170,3 +170,12 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Docker
+docker-compose.yml
+.dockerignore
+
+# Scripts
+init-db.sh
+newdocker.sh
+cleandocker.sh

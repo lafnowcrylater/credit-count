@@ -103,7 +103,7 @@
 		</Card>
 
 		<!-- Statistics Card -->
-		<Card class="w-6xl max-w-full p-5 sm:p-8 md:p-10 mb-6">
+		<!-- <Card class="w-6xl max-w-full p-5 sm:p-8 md:p-10 mb-6">
 			<h3 class="text-lg font-semibold mb-3">สรุปภาพรวม</h3>
 			<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
 				<div>
@@ -123,7 +123,7 @@
 					<p class="text-2xl font-bold text-gray-800">{groupData.statistics.totalCourses}</p>
 				</div>
 			</div>
-		</Card>
+		</Card> -->
 
 		<!-- Completed Courses -->
 		<div class="w-6xl max-w-full space-y-4 mb-6">
@@ -171,7 +171,7 @@
 					{#each courses.required as course}
 						{@const isCompleted = groupData.completedCourses.find(c => c.code === course.code)}
 						
-						<Card class="p-5 transition-all duration-200 {isCompleted ? 'opacity-60' : 'hover:shadow-md'}">
+						<Card class="w-6xl max-w-full p-5 transition-all duration-200 {isCompleted ? 'opacity-60' : 'hover:shadow-md'}">
 							<div class="flex flex-col md:flex-row md:justify-between md:items-center gap-3">
 								<div class="flex-1">
 									<div class="flex items-center gap-3 mb-2">

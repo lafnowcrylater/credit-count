@@ -10,7 +10,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_URL=mysql://courseuser:coursepass123@db:3306/courses
+      - DATABASE_URL=postgresql://courseuser:coursepass123@db:5432/courses
       - NODE_ENV=production
       - ORIGIN=http://localhost:3000
     depends_on:
@@ -20,21 +20,20 @@ services:
     networks:
       - app-network
 
-  # MySQL Database
+  # PostgreSQL Database
   db:
-    image: mysql:8.0
+    image: postgres:16-alpine
     container_name: credit-count-db
     environment:
-      - MYSQL_ROOT_PASSWORD=rootpass123
-      - MYSQL_DATABASE=courses
-      - MYSQL_USER=courseuser
-      - MYSQL_PASSWORD=coursepass123
+      - POSTGRES_USER=courseuser
+      - POSTGRES_PASSWORD=coursepass123
+      - POSTGRES_DB=courses
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpass123"]
+      test: ["CMD-SHELL", "pg_isready -U courseuser -d courses"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -42,16 +41,16 @@ services:
     networks:
       - app-network
 
-  # database management
-  phpmyadmin:
-    image: phpmyadmin:latest
-    container_name: credit-count-phpmyadmin
+  # pgAdmin
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: credit-count-pgadmin
     ports:
       - "8080:80"
     environment:
-      - PMA_HOST=db
-      - PMA_USER=root
-      - PMA_PASSWORD=rootpass123
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin123
+      - PGADMIN_CONFIG_SERVER_MODE=False
     depends_on:
       - db
     restart: unless-stopped
@@ -63,5 +62,51 @@ networks:
     driver: bridge
 
 volumes:
-  mysql_data:
+  postgres_data:
     driver: local
+
+#   # MySQL Database
+#   db:
+#     image: mysql:8.0
+#     container_name: credit-count-db
+#     environment:
+#       - MYSQL_ROOT_PASSWORD=rootpass123
+#       - MYSQL_DATABASE=courses
+#       - MYSQL_USER=courseuser
+#       - MYSQL_PASSWORD=coursepass123
+#     ports:
+#       - "3306:3306"
+#     volumes:
+#       - mysql_data:/var/lib/mysql
+#     healthcheck:
+#       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpass123"]
+#       interval: 10s
+#       timeout: 5s
+#       retries: 5
+#     restart: unless-stopped
+#     networks:
+#       - app-network
+
+#   # database management
+#   phpmyadmin:
+#     image: phpmyadmin:latest
+#     container_name: credit-count-phpmyadmin
+#     ports:
+#       - "8080:80"
+#     environment:
+#       - PMA_HOST=db
+#       - PMA_USER=root
+#       - PMA_PASSWORD=rootpass123
+#     depends_on:
+#       - db
+#     restart: unless-stopped
+#     networks:
+#       - app-network
+
+# networks:
+#   app-network:
+#     driver: bridge
+
+# volumes:
+#   mysql_data:
+#     driver: local

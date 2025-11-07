@@ -46,6 +46,7 @@
 		"drizzle-orm": "^0.44.7",
 		"flowbite": "^3.1.2",
 		"flowbite-svelte": "^1.17.3",
-		"mysql2": "^3.15.3"
+		"mysql2": "^3.15.3",
+		"postgres": "^3.4.7"
 	}
 }
