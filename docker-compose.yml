@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  # SvelteKit Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: credit-count-app
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=mysql://courseuser:coursepass123@db:3306/courses
+      - NODE_ENV=production
+      - ORIGIN=http://localhost:3000
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  # MySQL Database
+  db:
+    image: mysql:8.0
+    container_name: credit-count-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpass123
+      - MYSQL_DATABASE=courses
+      - MYSQL_USER=courseuser
+      - MYSQL_PASSWORD=coursepass123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpass123"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  # database management
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: credit-count-phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=rootpass123
+    depends_on:
+      - db
+    restart: unless-stopped
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local

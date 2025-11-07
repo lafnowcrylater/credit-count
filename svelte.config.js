@@ -12,24 +12,14 @@
 
 // export default config;
 
-import adapter from '@sveltejs/adapter-static';
-import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import adapter from '@sveltejs/adapter-node';
 
-const dev = process.argv.includes('dev');
-const base = dev ? '' : '/credit-count'; // change to your repo name
-
-export default {
-  preprocess: vitePreprocess(),
+const config = {
   kit: {
     adapter: adapter({
-      fallback: '200.html'
-    }),
-    paths: {
-      base
-    },
-    prerender: {
-      handleHttpError: 'warn' // suppress warnings about missing base paths
-    }
+      out: 'build' // output folder
+    })
   }
 };
 
+export default config;
