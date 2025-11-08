@@ -29,7 +29,9 @@ export async function POST({ request, cookies }) {
       success: true,
       student: {
         id: student.id,
-        name: student.name,
+        fname: student.fname,
+        lname: student.lname,
+        degree: student.degree,
         faculty: student.faculty,
         major: student.major,
         year: student.year
