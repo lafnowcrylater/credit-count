@@ -53,7 +53,9 @@ export async function validateSession(sessionId) {
   const [student] = await db
     .select({
       id: students.id,
-      name: students.name,
+      fname: students.fname,
+      lname: students.lname,
+      degree: students.degree,
       faculty: students.faculty,
       major: students.major,
       yearEnrolled: students.yearEnrolled,
