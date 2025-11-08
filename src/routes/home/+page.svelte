@@ -5,9 +5,9 @@
 	import { Card } from "flowbite-svelte";
 
 	export let data;
-  	// const { user } = data;
+  	const { user } = data;
 
-	$: user = data.user;
+	// $: user = data.user;
 	console.log('Home page user:', user);
 
 	let progress = null;
