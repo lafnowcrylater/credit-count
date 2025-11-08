@@ -54,7 +54,7 @@ export async function GET({ params, locals }) {
       .filter(r => r.curriculum_courses.courseGroup === group)
       .map(r => ({
         code: r.course_catalog.code,
-        name: r.course_catalog.name,
+        name: r.course_catalog.name_en,
         credits: r.course_catalog.credits,
         isRequired: r.curriculum_courses.isRequired,
         category: r.curriculum_courses.category
@@ -86,7 +86,7 @@ export async function GET({ params, locals }) {
       })
       .map(e => ({
         code: e.course.code,
-        name: e.course.name,
+        name: e.course.name_en,
         credits: e.course.credits,
         grade: e.enrollment.grade,
         semester: e.enrollment.semester,

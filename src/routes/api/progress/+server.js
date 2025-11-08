@@ -21,10 +21,13 @@ export async function GET({ locals }) {
       .from(students)
       .where(eq(students.id, user.id));
 
+    
+    console.log('Requesting studentData');
     if (!studentData) {
       return json({ error: 'Student not found' }, { status: 404 });
     }
-
+    console.log('DEBUG from progress GET - studentData:', studentData);
+      
     // Get curriculum data
     const [curriculum] = await db
       .select()
