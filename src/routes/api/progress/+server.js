@@ -1,7 +1,11 @@
 import { json } from '@sveltejs/kit';
-import { db } from '$lib/server/db';
+// import { db } from '$lib/server/db';
+import { getDb } from '$lib/server/db';
 import { students, curriculums, enrollments, courseCatalog, curriculumCourses } from '$lib/server/db/schema';
 import { eq, and } from 'drizzle-orm';
+
+
+const db = await getDb();
 
 export async function GET({ locals }) {
   const user = locals.user;
