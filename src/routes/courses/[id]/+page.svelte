@@ -45,7 +45,7 @@
 </script>
 
 <svelte:head>
-	<title>{groupData?.group.name || 'Course Details'}</title>
+	<title>{groupData?.group.name || 'Course Details'} - Credit Count</title>
 </svelte:head>
 
 <Navbar {user} />
@@ -144,7 +144,7 @@
 										เรียนแล้ว
 									</span>
 								</div>
-								<p class="text-gray-700 mb-1">{course.name}</p>
+								<p class="text-gray-700 mb-1">{course.name_en}</p>
 								<p class="text-gray-500 text-sm">หน่วยกิต: {course.credits}</p>
 							</div>
 							
@@ -180,7 +180,7 @@
 											{isCompleted ? 'เรียนแล้ว' : course.isRequired ? 'บังคับ' : 'เลือก'}
 										</span>
 									</div>
-									<p class="text-gray-700 mb-1">{course.name}</p>
+									<p class="text-gray-700 mb-1">{course.name_en}</p>
 									<p class="text-gray-500 text-sm">หน่วยกิต: {course.credits}</p>
 								</div>
 								

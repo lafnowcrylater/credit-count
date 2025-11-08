@@ -31,7 +31,7 @@
 	</NavBrand>
 
 	<NavUl>
-		<NavLi class="w-30 bg-transparent text-white text-base cursor-pointer">
+		<NavLi class="w-30 bg-[#e07b17] text-white text-base cursor-pointer">
 			{user.id || 'Unknown ID'}
 		</NavLi>
 		<Dropdown simple>
