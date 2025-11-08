@@ -10,6 +10,7 @@ export async function handle({ event, resolve }) {
   if (sessionId) {
     try {
       const user = await validateSession(sessionId);
+      console.log('Validated user:', user);
       event.locals.user = user;
     } catch (error) {
       console.error('Session validation failed:', error);
