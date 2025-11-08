@@ -66,7 +66,7 @@
 			<p class="text-gray-600">ปีที่เข้าศึกษา: {progress.student.yearEnrolled}</p>
 			<p class="text-gray-600">ระดับการศึกษา: {progress.student.degree}</p>
 			<p class="text-gray-600">คณะ: {progress.student.faculty}</p>
-			<p class="text-gray-600">สาขาวิชา: {progress.student.major}</p>
+			<p class="text-gray-600 mb-1">สาขาวิชา: {progress.student.major}</p>
 			<p class="text-gray-600">หลักสูตร: {progress.curriculum.name}</p>
 		</Card>
 
