@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import { Navbar, NavBrand, NavLi, NavUl, Dropdown, DropdownItem } from "flowbite-svelte";
 	
-	export const user = null;
+	export let user = null;
 
 	console.log('Navbar user:', user);
 	
