@@ -8,6 +8,7 @@
   	// const { user } = data;
 
 	$: user = data.user;
+	console.log('Home page user:', user);
 
 	let progress = null;
 	let loading = true;
