@@ -61,7 +61,7 @@
 			<p class="text-gray-600 mb-4">{error}</p>
 			<button 
 				on:click={goBack}
-				class="text-blue-600 hover:text-blue-800 font-semibold"
+				class="text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
 			>
 				← กลับสู่หน้าหลัก
 			</button>
@@ -127,15 +127,15 @@
 
 		<!-- Completed Courses -->
 		<div class="w-6xl max-w-full space-y-4 mb-6">
-			<h2 class="text-xl font-semibold mb-4 text-green-700">✓ วิชาที่เรียนแล้ว ({groupData.completedCourses.length})</h2>
+			<h2 class="text-xl font-semibold mb-4 text-green-700">รายวิชาที่เรียนแล้ว ({groupData.completedCourses.length})</h2>
 			
 			{#if groupData.completedCourses.length === 0}
-				<Card class="p-6 text-center text-gray-500">
+				<Card class="w-6xl max-w-full p-6 text-center text-gray-500">
 					ยังไม่มีวิชาที่เรียนในกลุ่มนี้
 				</Card>
 			{:else}
 				{#each groupData.completedCourses as course}
-					<Card class="p-5 transition-all duration-200 hover:shadow-md">
+					<Card class="w-6xl max-w-full p-5 transition-all duration-200 hover:shadow-md">
 						<div class="flex flex-col md:flex-row md:justify-between md:items-center gap-3">
 							<div class="flex-1">
 								<div class="flex items-center gap-3 mb-2">
@@ -144,8 +144,9 @@
 										เรียนแล้ว
 									</span>
 								</div>
-								<p class="text-gray-700 mb-1">{course.name}</p>
-								<p class="text-gray-500 text-sm">หน่วยกิต: {course.credits}</p>
+									<p class="text-gray-700">{course.nameEn}</p>
+									<p class="text-gray-500 text-sm mb-1">{course.name}</p>
+									<p class="text-gray-500 text-sm">หน่วยกิต: {course.credits}</p>
 							</div>
 							
 							<div class="flex flex-col items-end gap-1">
@@ -171,7 +172,7 @@
 					{#each courses.required as course}
 						{@const isCompleted = groupData.completedCourses.find(c => c.code === course.code)}
 						
-						<Card class="p-5 transition-all duration-200 {isCompleted ? 'opacity-60' : 'hover:shadow-md'}">
+						<Card class="w-6xl max-w-full p-5 transition-all duration-200 {isCompleted ? 'opacity-60' : 'hover:shadow-md'}">
 							<div class="flex flex-col md:flex-row md:justify-between md:items-center gap-3">
 								<div class="flex-1">
 									<div class="flex items-center gap-3 mb-2">
@@ -180,10 +181,8 @@
 											{isCompleted ? 'เรียนแล้ว' : course.isRequired ? 'บังคับ' : 'เลือก'}
 										</span>
 									</div>
-									<p class="text-gray-700 mb-1">{course.nameEn || course.name}</p>
-									{#if course.name && course.nameEn}
-										<p class="text-gray-500 text-sm">{course.name}</p>
-									{/if}
+									<p class="text-gray-700">{course.nameEn}</p>
+									<p class="text-gray-500 text-sm mb-1">{course.name}</p>
 									<p class="text-gray-500 text-sm">หน่วยกิต: {course.credits}</p>
 								</div>
 								
