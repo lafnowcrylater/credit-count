@@ -127,8 +127,9 @@ export async function GET({ locals }) {
     return json({
       student: {
         id: studentData.id,
-        name: studentData.name,
-        email: studentData.email,
+        fname: studentData.fname,
+        lname: studentData.lname,
+        degree: studentData.degree,
         faculty: studentData.faculty,
         major: studentData.major,
         yearEnrolled: studentData.yearEnrolled
