@@ -63,11 +63,11 @@
 		<Card class="w-6xl max-w-full p-5 sm:p-8 md:p-10 justify-center">
 			<h2 class="text-2xl font-semibold mb-2">{progress.student.fname} {progress.student.lname}</h2>
 			<p class="text-gray-600">รหัสนักศึกษา: {progress.student.id}</p>
-			<p class="text-gray-600">ปีที่เข้าศึกษา: {progress.student.yearEnrolled}</p>
 			<p class="text-gray-600">ระดับการศึกษา: {progress.student.degree}</p>
 			<p class="text-gray-600">คณะ: {progress.student.faculty}</p>
-			<p class="text-gray-600 mb-1">สาขาวิชา: {progress.student.major}</p>
-			<p class="text-gray-600">หลักสูตร: {progress.curriculum.name}</p>
+			<p class="text-gray-600">สาขาวิชา: {progress.student.major}</p>
+			<p class="text-gray-600">ปีที่เข้าศึกษา: {progress.student.yearEnrolled}</p>
+			<p class="text-gray-600 mt-2">หลักสูตร: {progress.curriculum.name}</p>
 		</Card>
 
 		<!-- Overall Progress Summary -->

@@ -108,7 +108,7 @@ export async function GET({ params, locals }) {
         break;
       case 'core':
         requiredCredits = curriculum.coreCreditsRequired;
-        groupName = 'หมวดวิชาเฉพาะสาขา';
+        groupName = 'หมวดวิชาเฉพาะ';
         break;
       case 'free_elective':
         requiredCredits = curriculum.freeElectiveCreditsRequired;
