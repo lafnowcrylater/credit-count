@@ -5,10 +5,6 @@ export async function handle({ event, resolve }) {
   event.locals.user = null;
 
   const sessionId = event.cookies.get('session');
-
-  // if (event.url.pathname.startsWith('/favicon') || event.url.pathname.startsWith('/api')) {
-  //   return await resolve(event);
-  // }
   
   // Validate session and attach user to event.locals
   if (sessionId) {

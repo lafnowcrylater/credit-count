@@ -29,8 +29,6 @@ export async function createSession(studentId) {
     expiresAt
   });
 
-  
-  console.log('DEBUG from createSession:', sessionId);
   return { sessionId, expiresAt };
 }
 
@@ -69,51 +67,16 @@ export async function validateSession(sessionId) {
   return student;
 }
 
-// Validate session
-// export async function validateSession(sessionId) {
-//   console.log('DEBUG from validateSession:', sessionId);
-//   if (!sessionId) return null;
-
-//   const [session] = await db
-//     .select()
-//     .from(sessions)
-//     .where(eq(sessions.id, sessionId))
-//     .limit(1);
-
-//   if (!session) return null;
-
-//   // Check if session is expired
-//   if (new Date() > session.expiresAt) {
-//     await db.delete(sessions).where(eq(sessions.id, sessionId));
-//     return null;
-//   }
-
-//   // Get student data
-//   const [student] = await db
-//     .select({
-//       id: students.id,
-//       email: students.email,
-//       name: students.name,
-//       faculty: students.faculty,
-//       major: students.major,
-//       yearEnrolled: students.yearEnrolled
-//     })
-//     .from(students)
-//     .where(eq(students.id, session.studentId))
-//     .limit(1);
-
-//   return student;
-// }
-
 // Delete session (logout)
 export async function deleteSession(sessionId) {
   console.log('DEBUG from deleteSession:', sessionId);
   await db.delete(sessions).where(eq(sessions.id, sessionId));
 }
 
-// Login user - using student ID and password
+// Login user
 export async function loginUser(studentId, password) {
   console.log('DEBUG from loginUser:', studentId);
+
   // Check if student exists
   const [student] = await db
     .select()
@@ -149,12 +112,10 @@ export async function loginUser(studentId, password) {
     .set({ lastLogin: new Date() })
     .where(eq(users.studentId, studentId));
 
-  console.log('DEBUG from loginUser:', studentId);
-
   return student;
 }
 
-// Create user account (admin only - for setting up passwords for students)
+// Create user account (admin only)
 export async function createUserAccount(studentId, password) {
   // Check if student exists
   const [student] = await db

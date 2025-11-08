@@ -4,6 +4,8 @@
 	import { Navbar, NavBrand, NavLi, NavUl, Dropdown, DropdownItem } from "flowbite-svelte";
 	
 	export const user = null;
+
+	console.log('Navbar user:', user);
 	
 	let loading = false;
 
@@ -30,7 +32,7 @@
 
 	<NavUl>
 		<NavLi class="w-30 bg-transparent text-white text-base cursor-pointer">
-			{user?.id ?? 'Guest'}
+			{user.id || 'Unknown ID'}
 		</NavLi>
 		<Dropdown simple>
 			<!-- <DropdownItem class="text-black text-sm">

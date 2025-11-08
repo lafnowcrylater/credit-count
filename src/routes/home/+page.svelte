@@ -1,16 +1,13 @@
-<!-- src/routes/home/+page.svelte -->
 <script>
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import Navbar from "$lib/Navbar.svelte";
 	import { Card } from "flowbite-svelte";
 
-	// export let data;
-	
-	// $: user = data.user;
-
 	export let data;
-  	const { user } = data;
+  	// const { user } = data;
+
+	$: user = data.user;
 
 	let progress = null;
 	let loading = true;
@@ -63,12 +60,13 @@
 	{:else if progress}
 		<!-- Student Info Card -->
 		<Card class="w-6xl max-w-full p-5 sm:p-8 md:p-10 justify-center">
-			<h2 class="text-2xl font-semibold mb-2">{progress.student.name}</h2>
+			<h2 class="text-2xl font-semibold mb-2">{progress.student.fname} {progress.student.lname}</h2>
 			<p class="text-gray-600">รหัสนักศึกษา: {progress.student.id}</p>
+			<p class="text-gray-600">ปีที่เข้าศึกษา: {progress.student.yearEnrolled}</p>
+			<p class="text-gray-600">ระดับการศึกษา: {progress.student.degree}</p>
 			<p class="text-gray-600">คณะ: {progress.student.faculty}</p>
 			<p class="text-gray-600">สาขาวิชา: {progress.student.major}</p>
-			<p class="text-gray-600">ปีที่เข้าศึกษา: {progress.student.yearEnrolled}</p>
-			<p class="text-gray-600 mt-2 text-sm">{progress.curriculum.name}</p>
+			<p class="text-gray-600">หลักสูตร: {progress.curriculum.name}</p>
 		</Card>
 
 		<!-- Overall Progress Summary -->
@@ -76,7 +74,7 @@
 			<h3 class="text-lg font-semibold mb-4">สรุปภาพรวม</h3>
 			<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
 				<div class="text-center">
-					<p class="text-gray-600 mb-2">ศึกษาทั่วไป</p>
+					<p class="text-gray-600 mb-2">วิชาศึกษาทั่วไป</p>
 					<!-- <p class="text-3xl font-bold text-blue-600">
 						{getCompletionPercentage(progress.progress.genEd.completed, progress.progress.genEd.required)}%
 					</p> -->
@@ -86,14 +84,14 @@
 					<p class="text-sm text-gray-500">หน่วยกิต</p>
 				</div>
 				<div class="text-center">
-					<p class="text-gray-600 mb-2">เฉพาะ</p>
+					<p class="text-gray-600 mb-2">วิชาเฉพาะ</p>
 					<p class="text-3xl font-bold text-green-600">
 						{progress.progress.core.completed}/{progress.progress.core.required}
 					</p>
 					<p class="text-sm text-gray-500">หน่วยกิต</p>
 				</div>
 				<div class="text-center">
-					<p class="text-gray-600 mb-2">เลือกเสรี</p>
+					<p class="text-gray-600 mb-2">วิชาเลือกเสรี</p>
 					<p class="text-3xl font-bold text-green-600">
 						{progress.progress.freeElective.completed}/{progress.progress.freeElective.required}
 					</p>

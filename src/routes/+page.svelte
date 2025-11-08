@@ -76,7 +76,7 @@
 				/>
 			</div>
 
-			<Button type="submit" class="w-full cursor-pointer" disabled={loading}>
+			<Button type="submit" class="w-full cursor-pointer bg-[#e07b17]" disabled={loading}>
 				{loading ? 'กำลังเข้าสู่ระบบ...' : 'เข้าสู่ระบบ'}
 			</Button>
 		</form>
@@ -88,6 +88,3 @@
 		</div>
 	</Card>
 </main>
-
-<style>
-</style>

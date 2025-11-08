@@ -4,10 +4,12 @@ import { pgTable, varchar, integer, boolean, decimal, timestamp, text, serial } 
 // MASTER DATA (From University)
 // ============================================
 
-// Students - imported from university system
+// Students
 export const students = pgTable('students', {
   id: varchar('id', { length: 8 }).primaryKey(),
-  name: varchar('name', { length: 255 }).notNull(),
+  fname: varchar('fname', { length: 100 }).notNull(),
+  lname: varchar('lname', { length: 100 }).notNull(),
+  degree: varchar('degree', { length: 100 }).notNull(),
   faculty: varchar('faculty', { length: 255 }).notNull(),
   major: varchar('major', { length: 255 }).notNull(),
   curriculumId: varchar('curriculum_id', { length: 20 }).notNull(),
@@ -19,6 +21,7 @@ export const students = pgTable('students', {
 export const curriculums = pgTable('curriculums', {
   id: varchar('id', { length: 20 }).primaryKey(),
   name: varchar('name', { length: 255 }).notNull(),
+  degree: varchar('degree', { length: 100 }).notNull(),
   faculty: varchar('faculty', { length: 255 }).notNull(),
   major: varchar('major', { length: 255 }).notNull(),
   year: integer('year').notNull(),
