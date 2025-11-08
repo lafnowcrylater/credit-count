@@ -1,10 +1,7 @@
 import { json } from '@sveltejs/kit';
-// import { db } from '$lib/server/db';
-import { getDb } from '$lib/server/db';
+import { db } from '$lib/server/db';
 import { students, curriculums, enrollments, courseCatalog, curriculumCourses } from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
-
-const db = await getDb();
 
 export async function GET({ params, locals }) {
   const { group } = params; // 'gen_ed', 'core', or 'free_elective'
@@ -54,7 +51,8 @@ export async function GET({ params, locals }) {
       .filter(r => r.curriculum_courses.courseGroup === group)
       .map(r => ({
         code: r.course_catalog.code,
-        name: r.course_catalog.name_en,
+        name: r.course_catalog.name,
+        nameEn: r.course_catalog.nameEn,
         credits: r.course_catalog.credits,
         isRequired: r.curriculum_courses.isRequired,
         category: r.curriculum_courses.category
@@ -86,7 +84,8 @@ export async function GET({ params, locals }) {
       })
       .map(e => ({
         code: e.course.code,
-        name: e.course.name_en,
+        name: e.course.name,
+        nameEn: e.course.nameEn,
         credits: e.course.credits,
         grade: e.enrollment.grade,
         semester: e.enrollment.semester,

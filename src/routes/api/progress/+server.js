@@ -1,14 +1,10 @@
 import { json } from '@sveltejs/kit';
-// import { db } from '$lib/server/db';
-import { getDb } from '$lib/server/db';
+import { db } from '$lib/server/db';
 import { students, curriculums, enrollments, courseCatalog, curriculumCourses } from '$lib/server/db/schema';
 import { eq, and } from 'drizzle-orm';
 
-const db = await getDb();
-
 export async function GET({ locals }) {
   const user = locals.user;
-  console.log('DEBUG from progress GET:', user.id);
   
   if (!user) {
     return json({ error: 'Unauthorized' }, { status: 401 });
@@ -21,37 +17,61 @@ export async function GET({ locals }) {
       .from(students)
       .where(eq(students.id, user.id));
 
-    
-    console.log('Requesting studentData');
     if (!studentData) {
       return json({ error: 'Student not found' }, { status: 404 });
     }
-    console.log('DEBUG from progress GET - studentData:', studentData);
-      
+
     // Get curriculum data
     const [curriculum] = await db
       .select()
       .from(curriculums)
       .where(eq(curriculums.id, studentData.curriculumId));
 
-    console.log('DEBUG from progress GET:', user.id);
-
-    // Get all enrollments with course details
-    const studentEnrollments = await db
-      .select({
-        enrollment: enrollments,
-        course: courseCatalog
-      })
+    // Get all enrollments
+    const enrollmentRecords = await db
+      .select()
       .from(enrollments)
-      .where(eq(enrollments.studentId, user.id))
-      .leftJoin(courseCatalog, eq(enrollments.courseCode, courseCatalog.code));
+      .where(eq(enrollments.studentId, user.id));
+
+    // Get course details for enrollments
+    const courseCodes = enrollmentRecords.map(e => e.courseCode);
+    const courseDetails = await db
+      .select()
+      .from(courseCatalog)
+      .where(eq(courseCatalog.code, courseCodes[0])); // Get all at once
+    
+    const courseMap = {};
+    for (const code of courseCodes) {
+      const [course] = await db
+        .select()
+        .from(courseCatalog)
+        .where(eq(courseCatalog.code, code));
+      if (course) courseMap[code] = course;
+    }
+
+    const studentEnrollments = enrollmentRecords.map(enrollment => ({
+      enrollment,
+      course: courseMap[enrollment.courseCode]
+    }));
 
     // Get curriculum requirements
-    const requirements = await db
+    const requirementRecords = await db
       .select()
       .from(curriculumCourses)
-      .where(eq(curriculumCourses.curriculumId, curriculum.id))
-      .leftJoin(courseCatalog, eq(curriculumCourses.courseCode, courseCatalog.code));
+      .where(eq(curriculumCourses.curriculumId, curriculum.id));
+
+    const requirements = [];
+    for (const req of requirementRecords) {
+      const [course] = await db
+        .select()
+        .from(courseCatalog)
+        .where(eq(courseCatalog.code, req.courseCode));
+      
+      requirements.push({
+        curriculum_courses: req,
+        course_catalog: course
+      });
+    }
 
     // Calculate progress for each group
     const genEdCourses = [];
@@ -73,6 +93,7 @@ export async function GET({ locals }) {
       const courseInfo = {
         code: course.code,
         name: course.name,
+        nameEn: course.nameEn,
         credits: course.credits,
         grade: enrollmentData.grade,
         semester: enrollmentData.semester
@@ -106,9 +127,8 @@ export async function GET({ locals }) {
     return json({
       student: {
         id: studentData.id,
-        fname: studentData.fname,
-        lname: studentData.lname,
-        degree: studentData.degree,
+        name: studentData.name,
+        email: studentData.email,
         faculty: studentData.faculty,
         major: studentData.major,
         yearEnrolled: studentData.yearEnrolled
