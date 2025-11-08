@@ -71,7 +71,7 @@
 		<Card class="w-6xl max-w-full p-5 sm:p-8 md:p-10 mb-4">
 			<button 
 				on:click={goBack}
-				class="mb-4 text-blue-600 hover:text-blue-800 flex items-center gap-2 font-semibold"
+				class="mb-4 text-blue-600 hover:text-blue-800 flex items-center gap-2 font-semibold cursor-pointer"
 			>
 				← กลับ
 			</button>
